@@ -502,7 +502,7 @@ odf.Style2CSS = function Style2CSS() {
         rule += applySimpleMapping(props, textPropertySimpleMapping);
 
         value = props.getAttributeNS(stylens, 'text-underline-style');
-        if (value === 'solid') {
+        if (value === 'solid' || value === 'dotted' || value === 'wave' || value === 'dash') {
             textDecorationLine += ' underline';
         }
         value = props.getAttributeNS(stylens, 'text-line-through-style');
@@ -528,6 +528,30 @@ odf.Style2CSS = function Style2CSS() {
                 textDecorationStyle += ' single';
                 break;
         }
+
+        value = props.getAttributeNS(stylens, 'text-underline-type');
+        if (value === 'double') {
+            textDecorationStyle = ' double';
+        }
+        
+        else {
+            value = props.getAttributeNS(stylens, 'text-underline-style');
+            switch (value) {
+                case 'solid':
+                    textDecorationStyle = ' solid';
+                    break;
+                case 'dotted':
+                    textDecorationStyle = ' dotted';
+                    break;
+                case 'wave':
+                    textDecorationStyle = ' wavy';
+                    break;
+                case 'dash':
+                    textDecorationStyle = ' dashed';
+                    break;
+            }
+        }
+
         if (textDecorationStyle) {
             // CSS3
             rule += 'text-decoration-style:' + textDecorationStyle + ';\n';
