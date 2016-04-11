@@ -419,6 +419,15 @@ gui.DirectFormattingController = function DirectFormattingController(
         applyTextPropertyToSelection('style:font-name', value);
     }
     this.setFontName = setFontName;
+    
+    /**
+     * @param {!string} value
+     * @return {undefined}
+     */
+    function setFontColor(value) {
+         applyTextPropertyToSelection('fo:color',value);
+    }
+    this.setFontColor = setFontColor;
 
     /**
      * Get all styles currently applied to the selected range. If the range is collapsed,

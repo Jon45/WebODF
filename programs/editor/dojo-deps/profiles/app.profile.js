@@ -96,7 +96,8 @@ var profile = {
 				"dijit/form/CheckBox",
 				"dojox/widget/ColorPicker",
 				"dijit/form/DropDownButton",
-				"dijit/TooltipDialog"
+				"dijit/TooltipDialog",
+                                "dijit/ColorPalette"
 			],
 
 			// By default, the build system will try to include `dojo/main` in the built `dojo/dojo` layer, which adds

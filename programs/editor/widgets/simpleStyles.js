@@ -27,9 +27,11 @@
 define("webodf/editor/widgets/simpleStyles", [
     "webodf/editor/widgets/fontPicker",
     "dijit/form/ToggleButton",
-    "dijit/form/NumberSpinner"],
-
-    function (FontPicker, ToggleButton, NumberSpinner) {
+    "dijit/form/NumberSpinner",
+    "dijit/ColorPalette",
+    "dijit/form/DropDownButton"],
+    
+    function (FontPicker, ToggleButton, NumberSpinner,ColorPalette,DropDownButton) {
         "use strict";
 
         var SimpleStyles = function (callback) {
@@ -43,7 +45,9 @@ define("webodf/editor/widgets/simpleStyles", [
                 strikethroughButton,
                 fontSizeSpinner,
                 fontPicker,
-                fontPickerWidget;
+                fontPickerWidget,
+                colorPalette,
+                colorDropdown;
 
             boldButton = new ToggleButton({
                 label: runtime.tr('Bold'),
@@ -124,8 +128,23 @@ define("webodf/editor/widgets/simpleStyles", [
                 directFormattingController.setFontName(value);
                 self.onToolDone();
             };
+    
+            colorPalette = new ColorPalette ({
+                palette: "7x10",
+                onChange: function (val) {
+                    directFormattingController.setFontColor(val);
+                    self.onToolDone();
+                }
+            });
+        
+            colorDropdown = new DropDownButton({
+                    label: runtime.tr('Color'),
+                    showLabel: false,
+                    iconClass: "dijitEditorIcon dijitEditorIconForeColor",
+                    dropDown: colorPalette
+            });
 
-            widget.children = [boldButton, italicButton, underlineButton, strikethroughButton, fontPickerWidget, fontSizeSpinner];
+            widget.children = [boldButton, italicButton, underlineButton, strikethroughButton, fontPickerWidget, fontSizeSpinner,colorDropdown];
             widget.startup = function () {
                 widget.children.forEach(function (element) {
                     element.startup();
