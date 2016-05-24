@@ -50,13 +50,16 @@ odf.ObjectNameGenerator = function ObjectNameGenerator(odfContainer, memberId) {
     var stylens = odf.Namespaces.stylens,
         drawns = odf.Namespaces.drawns,
         xlinkns = odf.Namespaces.xlinkns,
+        tablens = odf.Namespaces.tablens,
         utils = new core.Utils(),
         memberIdHash = utils.hashString(memberId),
         styleNameGenerator = null,
         frameNameGenerator = null,
         imageNameGenerator = null,
+        tableNameGenerator = null,
         existingFrameNames = {},
-        existingImageNames = {};
+        existingImageNames = {},
+        existingTableNames = {};
 
     /**
      * @param {string} prefix Prefix to use for unique name generation
@@ -174,5 +177,28 @@ odf.ObjectNameGenerator = function ObjectNameGenerator(odfContainer, memberId) {
             );
         }
         return imageNameGenerator.generateName();
+    };
+    
+    /**
+     * Generate a unique table name
+     * @return {!string}
+     */
+    this.generateTableName = function () {
+        var i, nodes, node;
+        if (frameNameGenerator === null) {
+            nodes = odfContainer.rootElement.body.getElementsByTagNameNS(tablens, 'table');
+            for (i = 0; i < nodes.length; i += 1) {
+                node = /**@type{!Element}*/(nodes.item(i));
+                existingTableNames[node.getAttributeNS(tablens, 'name')] = true;
+            }
+
+            tableNameGenerator = new NameGenerator(
+                "table" + memberIdHash + "_",
+                function () {
+                    return existingTableNames;
+                }
+            );
+        }
+        return tableNameGenerator.generateName();
     };
 };

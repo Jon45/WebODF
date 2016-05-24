@@ -90,6 +90,7 @@ gui.SessionControllerOptions = function () {
             createParagraphStyleOps = /**@type {function (!number):!Array.<!ops.Operation>}*/ (directFormattingController.createParagraphStyleOps),
             textController = new gui.TextController(session, sessionConstraints, sessionContext, inputMemberId, createCursorStyleOp, createParagraphStyleOps),
             imageController = new gui.ImageController(session, sessionConstraints, sessionContext, inputMemberId, objectNameGenerator),
+            tableController = new gui.TableController(session,inputMemberId, objectNameGenerator),
             imageSelector = new gui.ImageSelector(odtDocument.getOdfCanvas()),
             shadowCursorIterator = odtDocument.createPositionIterator(odtDocument.getRootNode()),
             /**@type{!core.ScheduledTask}*/
@@ -1046,6 +1047,13 @@ gui.SessionControllerOptions = function () {
          */
         this.getImageController = function () {
             return imageController;
+        };
+        
+        /**
+         * @return {!gui.TableController}
+         */
+        this.getTableController = function () {
+            return tableController;
         };
 
         /**

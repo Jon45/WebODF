@@ -338,20 +338,6 @@ define("webodf/editor/EditorSession", [
             }
         };
 
-        this.insertTable = function (initialRows, initialColumns, tableStyleName, tableColumnStyleName, tableCellStyleMatrix) {
-            var op = new ops.OpInsertTable();
-            op.init({
-                memberid: localMemberId,
-                position: self.getCursorPosition(),
-                initialRows: initialRows,
-                initialColumns: initialColumns,
-                tableStyleName: tableStyleName,
-                tableColumnStyleName: tableColumnStyleName,
-                tableCellStyleMatrix: tableCellStyleMatrix
-            });
-            session.enqueue([op]);
-        };
-
         /**
          * Takes a style name and returns the corresponding paragraph style
          * element. If the style name is an empty string, the default style

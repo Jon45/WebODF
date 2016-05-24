@@ -38,11 +38,12 @@ define("webodf/editor/Tools", [
     "webodf/editor/widgets/annotation",
     "webodf/editor/widgets/editHyperlinks",
     "webodf/editor/widgets/imageInserter",
+    "webodf/editor/widgets/tableInserter",
     "webodf/editor/widgets/paragraphStylesDialog",
     "webodf/editor/widgets/zoomSlider",
     "webodf/editor/widgets/aboutDialog",
     "webodf/editor/EditorSession"],
-    function (ready, MenuItem, DropDownMenu, Button, DropDownButton, Toolbar, ParagraphAlignment, SimpleStyles, UndoRedoMenu, CurrentStyle, AnnotationControl, EditHyperlinks, ImageInserter, ParagraphStylesDialog, ZoomSlider, AboutDialog, EditorSession) {
+    function (ready, MenuItem, DropDownMenu, Button, DropDownButton, Toolbar, ParagraphAlignment, SimpleStyles, UndoRedoMenu, CurrentStyle, AnnotationControl, EditHyperlinks, ImageInserter, TableInserter, ParagraphStylesDialog, ZoomSlider, AboutDialog, EditorSession) {
         "use strict";
 
         return function Tools(toolbarElementId, args) {
@@ -275,6 +276,9 @@ define("webodf/editor/Tools", [
 
                 // image insertion
                 createTool(ImageInserter, args.imageInsertingEnabled);
+
+                // table insertion
+                createTool(TableInserter,args.tableInsertingEnabled);
 
                 // close button
                 if (close) {
