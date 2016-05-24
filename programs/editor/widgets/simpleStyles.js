@@ -29,9 +29,11 @@ define("webodf/editor/widgets/simpleStyles", [
     "dijit/form/ToggleButton",
     "dijit/form/NumberSpinner",
     "dijit/ColorPalette",
-    "dijit/form/DropDownButton"],
+    "dojox/widget/ColorPicker",
+    "dijit/form/DropDownButton",
+    "dijit/DropDownMenu"],
     
-    function (FontPicker, ToggleButton, NumberSpinner,ColorPalette,DropDownButton) {
+    function (FontPicker, ToggleButton, NumberSpinner,ColorPalette,ColorPicker,DropDownButton,DropDownMenu) {
         "use strict";
 
         var SimpleStyles = function (callback) {
@@ -47,7 +49,9 @@ define("webodf/editor/widgets/simpleStyles", [
                 fontPicker,
                 fontPickerWidget,
                 colorPalette,
-                colorDropdown;
+                colorPicker,
+                colorDropdown,
+                colorMenu;
 
             boldButton = new ToggleButton({
                 label: runtime.tr('Bold'),
@@ -136,14 +140,24 @@ define("webodf/editor/widgets/simpleStyles", [
                     self.onToolDone();
                 }
             });
+            
+            colorPicker = new ColorPicker ({
+                onChange: function (val) {
+                    directFormattingController.setFontColor(val);
+                }
+            });
+            
+            colorMenu = new DropDownMenu();
+            colorMenu.addChild(colorPalette);
+            colorMenu.addChild(colorPicker);
         
             colorDropdown = new DropDownButton({
                     label: runtime.tr('Color'),
                     showLabel: false,
                     iconClass: "dijitEditorIcon dijitEditorIconForeColor",
-                    dropDown: colorPalette
+                    dropDown: colorMenu
             });
-
+            
             widget.children = [boldButton, italicButton, underlineButton, strikethroughButton, fontPickerWidget, fontSizeSpinner,colorDropdown];
             widget.startup = function () {
                 widget.children.forEach(function (element) {
