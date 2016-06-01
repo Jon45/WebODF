@@ -522,10 +522,10 @@ odf.Style2CSS = function Style2CSS() {
         value = props.getAttributeNS(stylens, 'text-line-through-type');
         switch (value) {
             case 'double':
-                textDecorationStyle += ' double';
+                textDecorationStyle = ' double';
                 break;
             case 'single':
-                textDecorationStyle += ' single';
+                textDecorationStyle = ' single';
                 break;
         }
 
