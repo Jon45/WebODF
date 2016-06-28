@@ -503,11 +503,11 @@ odf.Style2CSS = function Style2CSS() {
 
         value = props.getAttributeNS(stylens, 'text-underline-style');
         if (value === 'solid' || value === 'dotted' || value === 'wave' || value === 'dash') {
-            textDecorationLine += ' underline';
+            textDecorationLine = ' underline';
         }
         value = props.getAttributeNS(stylens, 'text-line-through-style');
         if (value === 'solid') {
-            textDecorationLine += ' line-through';
+            textDecorationLine = ' line-through';
         }
 
         if (textDecorationLine.length) {
